@@ -32,7 +32,7 @@ certificatesResolvers:
       email: "triet.doan@gwdg.de"
       storage: "/letsencrypt/acme.json"
       # For testing
-      caserver: "https://acme-staging-v02.api.letsencrypt.org/directory"
+      # caserver: "https://acme-staging-v02.api.letsencrypt.org/directory"
       tlsChallenge: {}
 ################################################################
 # Logging
