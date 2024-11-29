@@ -1,0 +1,16 @@
+http:
+  routers:
+    home:
+      entryPoints:
+        - web
+        - websecure
+      rule: "Host(`www.av-efi.net`)"
+      service: home
+      tls:
+        certResolver: letsencrypt
+
+  services:
+    home:
+      loadBalancer:
+        servers:
+          - url: "http://www.av-efi.net:3000"

@@ -1,0 +1,40 @@
+################################################################
+# API and dashboard configuration
+################################################################
+api:
+  dashboard: true
+  insecure: true
+################################################################
+# Provider configuration
+################################################################
+providers:
+  file:
+    filename: "/etc/traefik/traefik_dynamic.yml"
+################################################################
+# Entrypoint
+################################################################
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+  websecure:
+    address: ":443"
+################################################################
+# Server certificate
+################################################################
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: "triet.doan@gwdg.de"
+      storage: "/letsencrypt/acme.json"
+      # For testing
+      caserver: "https://acme-staging-v02.api.letsencrypt.org/directory"
+      tlsChallenge: {}
+################################################################
+# Logging
+################################################################
+accessLog: {}

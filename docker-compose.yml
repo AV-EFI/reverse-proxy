@@ -1,0 +1,22 @@
+name: reverse-proxy
+services:
+  traefik:
+    image: "traefik:v3.2"
+    container_name: "traefik"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./certificate:/certificate
+      - ./config/traefik.yml:/etc/traefik/traefik.yml
+      - ./config/traefik_dynamic.yml:/etc/traefik/traefik_dynamic.yml
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    name: proxy-network
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1450
